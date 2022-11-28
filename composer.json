@@ -1,0 +1,17 @@
+{
+    "name": "bakhshi/immodvisor",
+    "type": "composer-plugin",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Bakhshi\\Immodvisor\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Bakhshi-Faisal",
+            "email": "afaisal_bakhshi@live.com"
+        }
+    ],
+    "require": {}
+}
