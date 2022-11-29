@@ -1,6 +1,6 @@
 {
     "name": "bakhshi/immodvisor",
-    "type": "composer-plugin",
+    "type": "library",
     "license": "MIT",
 
     "authors": [
