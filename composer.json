@@ -13,5 +13,6 @@
             "email": "afaisal_bakhshi@live.com"
         }
     ],
+    "minimum-stability": "dev",
     "require": {}
 }
