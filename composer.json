@@ -13,11 +13,11 @@
             "email": "afaisal_bakhshi@live.com"
         }
     ],
-    "version": "1.0.0",
-    "minimum-stability": "dev",
     "require": {
         "php": ">=7.4.0",
         "ext-json": "*",
-        "ext-curl": "*"
+        "ext-curl": "*",
+        "minimum-stability": "dev",
+        "version": "1.0.0"
     }
 }
