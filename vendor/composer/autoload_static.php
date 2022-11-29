@@ -17,6 +17,7 @@ class ComposerStaticInitd4358ffd7f22b623119a80ddde6c6944
         'Bakhshi\\Immodvisor\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
+            1 => __DIR__ . '/../..' . '/src',
         ),
     );
 
