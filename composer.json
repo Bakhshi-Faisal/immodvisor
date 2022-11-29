@@ -15,5 +15,9 @@
     ],
     "version": "1.0.0",
     "minimum-stability": "dev",
-    "require": {}
+    "require": {
+        "php": ">=7.4.0",
+        "ext-json": "*",
+        "ext-curl": "*"
+    }
 }
