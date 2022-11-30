@@ -17,7 +17,6 @@ class ImmoConfig
         $averageRating = str_replace(".", ",", $averageRating);
 
         return array(
-            'company-rate'=>$averageRating,
             'reviews' => array_slice($reviewsData->datas->reviews,0,$max)
         );
     }
