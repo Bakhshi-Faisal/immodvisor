@@ -2,11 +2,7 @@
     "name": "bakhshi/immodvisor",
     "type": "library",
     "license": "MIT",
-    "autoload": {
-        "psr-4": {
-            "Bakhshi\\Immodvisor\\": "src/"
-        }
-    },
+
     "authors": [
         {
             "name": "Bakhshi-Faisal",
@@ -18,5 +14,15 @@
     "prefer-stable" : true,
     "require-dev": {
         "phpunit/phpunit": "^7 | ^8 "
+    },
+    "autoload": {
+        "psr-4": {
+            "Bakhshi\\Immodvisor\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Bakhshi\\Immodvisor\\": "src/"
+        }
     }
 }
