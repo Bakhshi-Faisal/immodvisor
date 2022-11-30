@@ -1,7 +1,10 @@
 {
     "name": "bakhshi/immodvisor",
     "type": "library",
+    "license": "MIT",
     "version": "1.0.0",
+    "minimum-stability": "dev",
+    "prefer-stable" : true,
     "autoload": {
         "psr-4": {
             "Bakhshi\\Immodvisor\\": "src/"
@@ -12,7 +15,5 @@
             "name": "Bakhshi-Faisal",
             "email": "afaisal_bakhshi@live.com"
         }
-    ],
-    "minimum-stability": "dev",
-    "require": {}
+    ]
 }
