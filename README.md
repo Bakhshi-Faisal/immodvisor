@@ -1,4 +1,4 @@
-This composer package allow you to get all immodvisor client feedbacks
+This composer package allows you to get all immodvisor client feedbacks
 
 Installation 
   
