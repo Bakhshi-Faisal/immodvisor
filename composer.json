@@ -1,6 +1,9 @@
 {
     "name": "bakhshi/immodvisor",
     "type": "library",
+    "license": "MIT",
+    "version": "1.0.0",
+    "prefer-stable" : true,
     "autoload": {
         "psr-4": {
             "Bakhshi\\Immodvisor\\": "src/"
