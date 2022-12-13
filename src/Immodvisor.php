@@ -46,7 +46,7 @@ class Immodvisor
      * @return array
      * @throws JsonException
      */
-    public function getCompanyNameAndReview(string $apiKey, string $saltIn, string $saltOut, int $idCompany): array
+    public function getCompanyNameAndRating(string $apiKey, string $saltIn, string $saltOut, int $idCompany): array
     {
         $infoCompany = array();
         if ($idCompany !== 0) {
