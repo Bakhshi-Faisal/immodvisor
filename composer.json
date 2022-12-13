@@ -24,5 +24,9 @@
         "psr-4": {
             "Bakhshi\\Immodvisor\\": "src/"
         }
-    }
+    },
+  "require": {
+    "ext-json": "*",
+    "ext-simplexml": "*"
+  }
 }
