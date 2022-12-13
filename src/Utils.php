@@ -7,18 +7,28 @@
  */
 namespace Bakhshi\Immodvisor;
 
-final class Utils extends immodvisor {
-	
-	public static function getReferer() {
+final class Utils extends Immodvisor {
+
+    /**
+     * @return string
+     */
+	public static function getReferer(): string
+    {
 		$protocol = 'http';
-		if((array_key_exists('HTTPS', $_SERVER) && ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1)) || (array_key_exists('HTTP_X_FORWARDED_PROTO', $_SERVER) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')) {
+		if((array_key_exists('HTTPS', $_SERVER) && ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] === 1)) || (array_key_exists('HTTP_X_FORWARDED_PROTO', $_SERVER) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')) {
 			$protocol = 'https';
 		}
-		$host = (array_key_exists('HTTP_HOST', $_SERVER)) ? $_SERVER['HTTP_HOST'] : null;
+		$host = $_SERVER['HTTP_HOST'] ?? null;
 		return $protocol.'://'.$host;
 	}
-	
-	public static function isEmail($var, $check_trash=true) {
+
+    /**
+     * @param $var
+     * @param bool $check_trash
+     * @return bool
+     */
+	public static function isEmail($var, bool $check_trash=true): bool
+    {
 		if(is_array($var) || is_object($var) || empty($var)) {
 			return false;
 		}
@@ -30,8 +40,13 @@ final class Utils extends immodvisor {
 		}
 		return true;
 	}
-	
-	public static function isEmailTrash($var) {
+
+    /**
+     * @param $var
+     * @return bool
+     */
+	public static function isEmailTrash($var): bool
+    {
 		if(is_array($var) || is_object($var) || empty($var)) {
 			return false;
 		}
@@ -43,15 +58,21 @@ final class Utils extends immodvisor {
 					   "@regbypass.comsafe-mail.net", "@safetymail.info", "@sandelf.de", "@saynotospams.com", "@selfdestructingmail.com", "@sendspamhere.com", "@sharklasers.com", "@shieldedmail.com", "@shiftmail.com", "@skeefmail.com", "@slopsbox.com", "@slushmail.com", "@smaakt.naar.gravel", "@smellfear.com", "@snakemail.com", "@sneakemail.com", "@sofort-mail.de", "@sogetthis.com", "@soodonims.com", "@spam.la", "@spamavert.com", "@spambob.net", "@spambob.org", "@spambog.com", "@spambog.de", "@spambog.ru", "@spambox.info", "@spambox.us", "@spamcannon.com", "@spamcannon.net", "@spamcero.com", "@spamcorptastic.com", "@spamcowboy.com", "@spamcowboy.net", "@spamcowboy.org", "@spamday.com", "@spamex.com", "@spamfree.eu", "@spamfree24.com", 
 					   "@spamfree24.de", "@spamfree24.eu", "@spamfree24.info", "@spamfree24.net", "@spamfree24.org", "@spamgourmet.com", "@spamgourmet.net", "@spamgourmet.org", "@spamherelots.com", "@spamhereplease.com", "@spamhole.com", "@spamify.com", "@spaminator.de", "@spamkill.info", "@spaml.com", "@spaml.de", "@spammotel.com", "@spamobox.com", "@spamspot.com", "@spamthis.co.uk", "@spamthisplease.com", "@speed.1s.fr", "@suremail.info", "@tempalias.com", "@tempe-mail.com", "@tempemail.biz", "@tempemail.com", "@tempemail.net", "@tempinbox.co.uk", "@tempinbox.com", "@tempomail.fr", "@temporaryemail.net", "@temporaryinbox.com", "@tempymail.com", "@thankyou2010.com", "@thisisnotmyrealemail.com", "@throwawayemailaddress.com", 
 					   "@tilien.com", "@tmailinator.com", "@tradermail.info", "@trash-amil.com", "@trash-mail.at", "@trash-mail.com", "@trash-mail.de", "@trash2009.com", "@trashmail.at", "@trashmail.com", "@trashmail.me", "@trashmail.net", "@trashmailer.com", "@trashymail.com", "@trashymail.net", "@trillianpro.com", "@tyldd.com", "@tyldd.com", "@uggsrock.com", "@wegwerfmail.de", "@wegwerfmail.net", "@wegwerfmail.org", "@wh4f.org", "@whyspam.me", "@willselfdestruct.com", "@winemaven.info", "@wronghead.com", "@wuzupmail.net", "@xoxy.net", "@yogamaven.com", "@yopmail.com", "@yopmail.fr", "@yopmail.net", "@yuurok.com", "@zippymail.info", "@zoemail.com");
-		for($i=0; $i<  count($trash); $i++) {
-			if(substr($var, 0-strlen($trash[$i])) == $trash[$i]) {
+		for($i=0, $iMax = count($trash); $i< $iMax; $i++) {
+			if(substr($var, 0-strlen($trash[$i])) === $trash[$i]) {
 				return true;
 			}
 		}
 		return false;
 	}
-	
-	public static function isInt($var, $unsigned=true) {
+
+    /**
+     * @param $var
+     * @param bool $unsigned
+     * @return bool
+     */
+	public static function isInt($var, bool $unsigned=true): bool
+    {
 		if(is_array($var) || is_object($var)) {
 			return false;
 		}
@@ -60,8 +81,14 @@ final class Utils extends immodvisor {
 		}
 		return (bool)preg_match('`^-?[0-9]+$`', $var);
 	}
-	
-	public static function isFloat($var, $unsigned=true) {
+
+    /**
+     * @param $var
+     * @param bool $unsigned
+     * @return bool
+     */
+	public static function isFloat($var, bool $unsigned=true): bool
+    {
 		if(is_array($var) || is_object($var)) {
 			return false;
 		}
@@ -70,8 +97,14 @@ final class Utils extends immodvisor {
 		}
 		return (bool)preg_match('`^-?[0-9]*\.?[0-9]+$`', $var);
 	}
-	
-	public static function isUrl($var, $protocols=array('http','https')) {
+
+    /**
+     * @param $var
+     * @param array $protocols
+     * @return bool
+     */
+	public static function isUrl($var, array $protocols=array('http','https')): bool
+    {
 		if(is_array($var) || is_object($var)) {
 			return false;
 		}
@@ -88,10 +121,15 @@ final class Utils extends immodvisor {
 			}
 		}
 		$var = self::removeAccents($var);
-		return (filter_var($var, FILTER_VALIDATE_URL) === false) ? false : true;
+		return !((filter_var($var, FILTER_VALIDATE_URL) === false));
 	}
-	
-	public static function removeAccents($string) {
+
+    /**
+     * @param $string
+     * @return string
+     */
+	public static function removeAccents($string): string
+    {
 		if(!preg_match('/[\x80-\xff]/', $string)) {
 			return $string;
 		}
@@ -189,8 +227,7 @@ final class Utils extends immodvisor {
 			chr(197).chr(188) => 'z', chr(197).chr(189) => 'Z',
 			chr(197).chr(190) => 'z', chr(197).chr(191) => 's'
 		);
-		$string = strtr($string, $chars);
-		return $string;
+        return strtr($string, $chars);
 	}
 	
 }

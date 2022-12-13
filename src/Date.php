@@ -9,11 +9,12 @@ namespace Bakhshi\Immodvisor;
 
 final class Date {
 	
-	private static $time = null;
-	private static $date = null;
-	private static $datetime = null;
+	private static $time;
+	private static $date;
+	private static $datetime;
 	
-	private static function init() {
+	private static function init(): void
+    {
 		if(self::$time !== null) {
 			return;
 		}
@@ -37,11 +38,12 @@ final class Date {
 		return self::$datetime;
 	}
 	
-	public static function isDate($date) {
+	public static function isDate($date): bool
+    {
 		if(!is_string($date)) {
 			return false;
 		}
-		if(strlen($date) != 10) {
+		if(strlen($date) !== 10) {
 			return false;
 		}
 		if(!preg_match('`^[0-9]{4}-[0-9]{2}-[0-9]{2}$`', $date)) {
@@ -60,7 +62,7 @@ final class Date {
 		if(!is_string($datetime)) {
 			return false;
 		}
-		if(strlen($datetime) != 19) {
+		if(strlen($datetime) !== 19) {
 			return false;
 		}
 		if(!self::isDate(substr($datetime, 0, 10))) {

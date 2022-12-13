@@ -6,5 +6,5 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Bakhshi\\Immodvisor\\' => array($baseDir . '/src'),
+    'Bakhshi\\Immodvisor\\' => array($baseDir . '/src', $baseDir . '/src'),
 );
