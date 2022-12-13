@@ -1,35 +1,73 @@
 <?php
-/**
- * Librairie immodvisor
- * Afin de profiter pleinement des mises à jours de cette librarie, il est fortement recommandé de ne pas la modifier
- * @author Jeremy Humbert <jeremy@immodvisor.com>
- * @copyright 2019 immodvisor
- */
+
 namespace Bakhshi\Immodvisor;
 
+use JsonException;
 
-class Immodvisor {
-	
-	public const VERSION = '1.7.0';
-    public const URL_API_PROD = 'https://api.immodvisor.com/';
-	public const URL_API_DEV = 'http://api.immodvisor.digital/';
-	
-	private $env = 'prod';
-	
-	public function env($env): Immodvisor
+class Immodvisor
+{
+    /**
+     * @param string $apiKey
+     * @param string $saltIn
+     * @param string $saltOut
+     * @param int $idCompany
+     * @param int $max
+     * @return array[]
+     * @throws JsonException
+     */
+    public function getLastReview(string $apiKey, string $saltIn, string $saltOut, int $idCompany, int $max): array
     {
-		if(is_string($env) && in_array($env, array('dev', 'prod'))) {
-			$this->env = (string) $env;
-		}
-		return $this;
-	}
-	
-	protected function getUrlApi(): string
+        $feedbacks = array();
+        if ($idCompany !== 0) {
+
+            $api = new Api($apiKey,
+                $saltIn,
+                $saltOut);
+            $api->env('prod');
+
+            $api->debug(false);
+            $reviewsData = $api->reviewList($idCompany)->parse();
+            $brand_json = $api->companyGet($idCompany)->get();
+            $brand = json_decode($brand_json, TRUE, 512, JSON_THROW_ON_ERROR);
+            if (isset($brand["datas"]["company"]["rating"])) {
+                $feedbacks = array_slice($reviewsData->datas->reviews, 0, $max);
+            }
+        }
+        return array(
+            'reviews' => $feedbacks
+        );
+    }
+
+    /**
+     * @param string $apiKey
+     * @param string $saltIn
+     * @param string $saltOut
+     * @param int $idCompany
+     * @return array
+     * @throws JsonException
+     */
+    public function getCompanyNameAndReview(string $apiKey, string $saltIn, string $saltOut, int $idCompany): array
     {
-		if($this->env == 'dev') {
-			return self::URL_API_DEV;
-		}
-		return self::URL_API_PROD;
-	}
-	
+        $infoCompany = array();
+        if ($idCompany !== 0) {
+            $api = new Api($apiKey,
+                $saltIn,
+                $saltOut);
+            $api->env('prod');
+            $api->debug(false);
+
+            $brand_json = $api->companyGet($idCompany)->get();
+            $brand = json_decode($brand_json, TRUE, 512, JSON_THROW_ON_ERROR);
+            if (isset($brand["datas"]["company"]["rating"])) {
+                $averageRating = $brand["datas"]["company"]["rating"];
+                $branchName = $brand["datas"]["company"]["address"]["city"];
+                $infoCompany = array(
+                    'rate' => $averageRating,
+                    'branchName' => $branchName
+                );
+
+            }
+        }
+        return $infoCompany;
+    }
 }

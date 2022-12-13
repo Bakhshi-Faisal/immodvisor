@@ -7,7 +7,7 @@
  */
 namespace Bakhshi\Immodvisor;
 
-final class Utils extends Immodvisor {
+final class Utils extends ImmodvisorConfig {
 
     /**
      * @return string

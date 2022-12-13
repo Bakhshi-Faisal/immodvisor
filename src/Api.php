@@ -11,7 +11,7 @@ namespace Bakhshi\Immodvisor;
 /**
  * Classe object Api
  */
-class Api extends Immodvisor implements iApi
+class Api extends ImmodvisorConfig implements iApi
 {
 
     public const METHOD_GET = 'GET';
